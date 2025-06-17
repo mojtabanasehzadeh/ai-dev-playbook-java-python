@@ -1,0 +1,21 @@
+[project]
+name = "python_app"
+version = "0.1.0"
+description = "A simple Python application."
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",
+    "numpy<2.0,>=1.20",
+    # "my-other-local-package @ file:///path/to/my_other_local_package" # For local dependencies
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "flake8",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+backend-path = ["."] # Optional: if your build backend is in a subdirectory

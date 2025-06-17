@@ -1,0 +1,57 @@
+// Define project group and version for the entire project
+group = 'com.moji.ai' // TODO: Update with your actual group ID
+version = '0.1.0-SNAPSHOT'
+
+// Centralize dependency versions for consistency across all submodules
+ext {
+    // Example versions - replace with actual versions your project uses
+    // springBootVersion = '3.2.0'
+    // jacksonVersion = '2.15.3'
+    junitVersion = '5.10.1'
+    // Add other common dependency versions here
+}
+
+subprojects {
+    apply plugin: 'java' // Assumes your submodules are Java-based
+
+    // Submodules will inherit the group and version from the root project.
+    // You can override these in individual submodule build.gradle files if needed.
+
+    repositories {
+        mavenCentral() // All submodules will use Maven Central to resolve dependencies
+    }
+
+    java {
+        // Set a consistent Java version across all submodules
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    dependencies {
+        // Submodules can then use the versions defined in `ext` like this:
+        // implementation "com.fasterxml.jackson.core:jackson-databind:${rootProject.ext.jacksonVersion}"
+        // testImplementation "org.junit.jupiter:junit-jupiter-api:${rootProject.ext.junitVersion}"
+        // testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${rootProject.ext.junitVersion}"
+    }
+
+    tasks.withType(Test) {
+        useJUnitPlatform() // Ensures JUnit 5 tests are run correctly
+    }
+}
+
+// Your existing custom task to run a Python script
+task runPython(type: Exec) {
+    workingDir 'python_app/ai-env' // Ensure this path is correct relative to the root project directory
+    commandLine 'python3', 'test_setup.py'
+    // Optional: You might want to handle output or errors
+    // standardOutput = new ByteArrayOutputStream()
+    // errorOutput = new ByteArrayOutputStream()
+    // doLast {
+    //    if (standardOutput.size() > 0) println "Python script output: ${standardOutput.toString().trim()}"
+    //    if (errorOutput.size() > 0) println "Python script error: ${errorOutput.toString().trim()}"
+    // }
+}
+
+// It's highly recommended to use the Gradle Wrapper.
+// If you haven't set it up, run: ./gradlew wrapper --gradle-version <latest_stable_version>
+// (e.g., ./gradlew wrapper --gradle-version 8.6)

@@ -1,0 +1,3 @@
+rootProject.name = 'ai-dev-playbook-java-python'
+include ':java_app'
+include ':python_app'

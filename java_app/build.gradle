@@ -1,0 +1,37 @@
+plugins {
+    id 'java' // Standard Java plugin
+    id 'org.springframework.boot' version '3.2.2' // Spring Boot plugin - use the latest stable version
+    id 'io.spring.dependency-management' version '1.1.4' // For Spring Boot dependency management
+    // 'application' plugin is often used with Spring Boot if it's an executable app
+    // id 'application'
+}
+
+// If it's an executable Spring Boot application, define the main class
+// application {
+//    mainClass = 'com.example.ai_learning.java_app.MainApplication' // TODO: Update with your Spring Boot main class
+// }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Starters
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Example: for web applications
+    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Example: for database access
+    // implementation 'org.springframework.boot:spring-boot-starter-security' // Example: for security
+
+    // Your existing Weka dependency
+    implementation("nz.ac.waikato.cms.weka:weka-stable:3.8.6")
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Ensure JUnit 5 is used if not already configured in the root project
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:${rootProject.ext.junitVersion}"
+    // testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${rootProject.ext.junitVersion}"
+}
+
+// If you are using JUnit 5, ensure the test task uses it
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
