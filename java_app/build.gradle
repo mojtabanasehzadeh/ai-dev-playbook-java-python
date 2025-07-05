@@ -1,15 +1,23 @@
 plugins {
-    id 'java' // Standard Java plugin
-    id 'org.springframework.boot' version '3.2.2' // Spring Boot plugin - use the latest stable version
-    id 'io.spring.dependency-management' version '1.1.4' // For Spring Boot dependency management
+    id 'org.springframework.boot' version '3.1.3' // or latest 3.1.x
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'application'
     // 'application' plugin is often used with Spring Boot if it's an executable app
     // id 'application'
 }
 
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
 // If it's an executable Spring Boot application, define the main class
-// application {
-//    mainClass = 'com.example.ai_learning.java_app.MainApplication' // TODO: Update with your Spring Boot main class
-// }
+application {
+    mainClass = 'com.moji.ai.Application'
+}
 
 repositories {
     mavenCentral()
@@ -18,8 +26,9 @@ repositories {
 dependencies {
     // Spring Boot Starters
     implementation 'org.springframework.boot:spring-boot-starter-web' // Example: for web applications
-    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Example: for database access
-    // implementation 'org.springframework.boot:spring-boot-starter-security' // Example: for security
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' // For WebClient
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'nz.ac.waikato.cms.weka:weka-stable:3.8.6'
 
     // Your existing Weka dependency
     implementation("nz.ac.waikato.cms.weka:weka-stable:3.8.6")

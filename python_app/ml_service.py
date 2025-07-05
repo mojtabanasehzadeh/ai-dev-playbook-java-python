@@ -18,7 +18,7 @@ def train_model():
     X = df[['team_size', 'complexity_score']]
     y = df['on_time']
 
-    model = RandomForestClassifier(n_estimators=50, random_state=42)
+    model = RandomForestClassifier(n_estimators=100, random_state=42, max_depth=5, min_samples_split=3)
     model.fit(X, y)
     return model
 

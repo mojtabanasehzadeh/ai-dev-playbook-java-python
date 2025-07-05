@@ -1,4 +1,5 @@
 fastapi
-uvicorn
+pydantic
 pandas
 scikit-learn
+uvicorn

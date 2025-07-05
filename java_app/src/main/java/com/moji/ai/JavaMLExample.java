@@ -5,6 +5,7 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
+
 import java.util.ArrayList;
 
 public class JavaMLExample {
@@ -36,7 +37,8 @@ public class JavaMLExample {
 
         // Train model
         RandomForest classifier = new RandomForest();
-        classifier.setNumIterations(10);
+        classifier.setNumIterations(100);
+        classifier.setMaxDepth(5);
         classifier.buildClassifier(dataset);
 
         // Make prediction
@@ -48,6 +50,6 @@ public class JavaMLExample {
 
         String result = prediction == 0 ? "DELAYED" : "ON TIME";
         System.out.printf("Prediction for team_size=6, complexity=5: %s%n", result);
-        System.out.printf("Confidence: %.2f%n", probabilities[(int)prediction]);
+        System.out.printf("Confidence: %.2f%n", probabilities[(int) prediction]);
     }
 }
